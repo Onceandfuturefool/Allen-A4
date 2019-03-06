@@ -100,13 +100,13 @@ function stats(req, res)
       writeResult(req, res, {'error': err });
     else
     {
-      con.query("SELECT MAX(GAME_ID), MAX(GUESSES), MIN(GUESSES FROM STATS", function (err, result, fields)
+      con.query("SELECT MIN(GUESSES)AS best,MAX(GUESSES) AS worst, MAX(GAME_ID) AS gamesPlayed FROM STATS", function (err, result, fields)
       {
         if(err)
           writeResult(req, res, {'error': err});
         
         else
-         writeResult(req, res, {'result': result});
+         writeResult(req, res, {'result': result[0]});
         
       });
        
